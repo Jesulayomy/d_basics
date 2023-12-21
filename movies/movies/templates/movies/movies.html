@@ -15,11 +15,12 @@
         </tr>
         {% for movie in movies %}
         <tr>
-            <td>{{ movie.title }}</td>
+            <td><a href={{movie.id}}>{{ movie.title }}</a></td>
             <td>{{ movie.year }}</td>
             <td>{{ movie.genre }}</td>
         </tr>
         {% endfor%}
     </table>
+    <p>Add a new movie <a href="/movies/add">here</a></p>
 </body>
 </html>

@@ -21,6 +21,7 @@ from .models import Choice, Question
 #     return HttpResponse(template.render(context, request))
 #     # return render(request, "polls/index.html", context)
 
+
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
     context_object_name = "latest_question_list"
@@ -47,7 +48,7 @@ class DetailView(generic.DetailView):
 
 class ResultsView(generic.DetailView):
     model = Question
-    template_name = "polls/results.html" 
+    template_name = "polls/results.html"
 
 
 # def detail(request, question_id):
@@ -84,4 +85,6 @@ def vote(request, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+        return HttpResponseRedirect(
+            reverse("polls:results", args=(question.id,))
+        )

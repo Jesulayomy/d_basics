@@ -1,9 +1,11 @@
 <h1>{{ question.question_text }}</h1>
 
 <ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
+{% with answer=question.answer_set.first %}
+    {% for choice in question.choice_set.all %}
+        <li {% if answer.choice.choice_text == choice.choice_text %}style="color: green;"{% endif %}>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+    {% endfor %}
+{% endwith %}
 </ul>
 
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>

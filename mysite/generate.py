@@ -10,3 +10,5 @@ def run_generate():
 
     item = t.item_set.create(text="Buy milk", complete=False)
     item.save()
+
+    t.filter(name__startswith="Ho")

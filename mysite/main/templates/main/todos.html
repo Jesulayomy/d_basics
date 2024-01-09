@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+ToDo
+{% endblock %}
+
+{% block content %}
+    <h1>ToDo Lists</h1>
+    <ul>
+        {% for list in todos %}
+            <li><a href="/{{ list.id }}">{{ list.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="/create"><button type="submit" name="create" value="create">Create List</button></a>
+{% endblock %}

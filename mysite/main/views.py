@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from .forms import CreateNewList
@@ -18,5 +18,13 @@ def home(response):
     return render(response,"main/home.html", {"name": "Home Page"})
 
 def create(response):
-    form = CreateNewList()
-    return render(response, "main/create.html", {"form": form})
+    if response.method == "POST":
+        form = CreateNewList(response.POST)
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            todo = ToDoList(name=name)
+            todo.save()
+            return HttpResponseRedirect(f"/{todo.id}")
+    else:
+        form = CreateNewList()
+        return render(response, "main/create.html", {"form": form})

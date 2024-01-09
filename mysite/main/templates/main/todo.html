@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+ToDo
+{% endblock %}
+
+{% block content %}
+    <h2>{{ todo.name }}</h2>
+    <ul>
+        {% for item in todo.item_set.all %}
+            {% if item.complete == False %}
+                <li>{{ item.text }}</li>
+            {% else %}
+                <li style="color: green;">{{ item.text }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}

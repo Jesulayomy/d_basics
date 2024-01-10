@@ -5,10 +5,12 @@ Create List
 {% endblock %}
 
 {% block content %}
-    <h2>Create a new ToDo List</h2>
-    <form action="/create/" method="POST">
+    <h2 class="my-3">Create a new ToDo List</h2>
+    <form action="/create/" method="POST" class="form-control input-group">
         {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit" name="save">Create</button>
+        <div class="mt-1">
+            {{form}}
+        </div>
+        <button type="submit" name="save" class="btn btn-success mt-0 input-group-prepend">Create</button>
     </form>
 {% endblock %}

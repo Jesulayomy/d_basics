@@ -27,7 +27,8 @@ def todo(response, id):
     return render(response,"main/todo.html", {"todo": lst})
 
 def home(response):
-    return render(response,"main/home.html", {"name": "Home Page"})
+    todos = ToDoList.objects.all()
+    return render(response, "main/home.html", {"todos": todos})
 
 def create(response):
     if response.method == "POST":

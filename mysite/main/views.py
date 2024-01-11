@@ -27,7 +27,7 @@ def todo(response, id):
     return render(response,"main/todo.html", {"todo": lst})
 
 def home(response):
-    todos = ToDoList.objects.all()
+    todos = ToDoList.objects.all()[:3]
     return render(response, "main/home.html", {"todos": todos})
 
 def create(response):

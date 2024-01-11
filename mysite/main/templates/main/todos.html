@@ -1,15 +1,22 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-ToDo
+ToDos
 {% endblock %}
 
 {% block content %}
     <h1>ToDo Lists</h1>
-    <ul>
+    <div class="list-group mb-2">
         {% for list in todos %}
-            <li><a href="/{{ list.id }}">{{ list.name }}</a></li>
+            <div class="d-flex justify-content-between align-items-center list-group-item">
+                <a href="/{{list.id}}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover list-group-item-action">
+                    {{ list.name }}
+                </a>
+                <span class="badge bg-primary rounded-pill">
+                    {{ list.item_set.count }}
+                </span>
+            </div>
         {% endfor %}
-    </ul>
-    <a href="/create"><button type="submit" name="create" value="create">Create List</button></a>
+    </div>
+    <a href="/create"><button type="submit" name="create" value="create" class="btn btn-primary">Create List</button></a>
 {% endblock %}

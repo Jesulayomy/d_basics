@@ -8,9 +8,9 @@ from .models import Item, ToDoList
 # Create your views here.
 def todo(response, id):
     try:
-        lst = ToDoList.objects.get(id=id)
+        lst = response.user.todolist.get(id=id)
     except ToDoList.DoesNotExist:
-        return HttpResponse("<h1>This list does not exist</h1>")
+        return HttpResponse("<h2>This list does not exist or is not yours</h2>")
     if response.method == "POST":
         if response.POST.get("save"):
             for item in lst.item_set.all():
@@ -27,7 +27,10 @@ def todo(response, id):
     return render(response,"main/todo.html", {"todo": lst})
 
 def home(response):
-    todos = ToDoList.objects.all()[:3]
+    if response.user.is_authenticated:
+        todos = response.user.todolist.all()[:3]
+    else:
+        todos = []
     return render(response, "main/home.html", {"todos": todos})
 
 def create(response):
@@ -37,11 +40,12 @@ def create(response):
             name = form.cleaned_data["name"]
             todo = ToDoList(name=name)
             todo.save()
+            response.user.todolist.add(todo)
             return HttpResponseRedirect(f"/{todo.id}")
     else:
         form = CreateNewList()
         return render(response, "main/create.html", {"form": form})
 
 def todos(response):
-    todos = ToDoList.objects.all()
+    todos = response.user.todolist.all()
     return render(response, "main/todos.html", {"todos": todos})

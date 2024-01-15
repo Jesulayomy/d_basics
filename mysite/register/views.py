@@ -1,8 +1,10 @@
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import login, authenticate, update_session_auth_hash
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from .forms import RegisterForm, ResetForm
+from .forms import RegisterForm
 
 
 # Create your views here.
@@ -16,12 +18,16 @@ def register(response):
         form = RegisterForm()
     return render(response, "register/register.html", {"form": form})
 
-def reset(response):
+def change(response):
     if response.method == "POST":
-        form = ResetForm(response.POST)
+        form = PasswordChangeForm(response.user, response.POST)
         if form.is_valid():
-            form.save()
-        return redirect("/")
+            user = form.save()
+            update_session_auth_hash(response, user)
+            messages.success(response, 'Password changed sucesfully')
+            return redirect("/")
+        else:
+            return HttpResponse("<h2>Invalid details</h2>")
     else:
-        form = ResetForm()
-    return render(response, "register/reset.html", {"form": form})
+        form = PasswordChangeForm(response.user)
+    return render(response, "reset/change.html", {"form": form})

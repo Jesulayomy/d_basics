@@ -2,7 +2,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
-from .forms import RegisterForm
+from .forms import RegisterForm, ResetForm
 
 
 # Create your views here.
@@ -15,3 +15,13 @@ def register(response):
     else:
         form = RegisterForm()
     return render(response, "register/register.html", {"form": form})
+
+def reset(response):
+    if response.method == "POST":
+        form = ResetForm(response.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("/")
+    else:
+        form = ResetForm()
+    return render(response, "register/reset.html", {"form": form})

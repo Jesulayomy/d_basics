@@ -10,7 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from celery.schedules import crontab
+from datetime import datetime
 from pathlib import Path
+
+
+CELERY_BEAT_SCHEDULE = {
+    'Daily reset' : {
+        'task': 'main.tasks.daily_reset',
+        'schedule': crontab(hour=23, minute=59),
+    },
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

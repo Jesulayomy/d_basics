@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body> 
+<body>
     <h1> Django tutorial </h1>
-    <p> This is a tutorial for Django thanks to Mosh, Caleb and Documentation. I covered Django basics, templating, and models</p>
+    <p> This is a collection of mini projects for Django thanks to Mosh, Caleb and other documentation. I covered Django basics, templating, models, serialization, rest framework, authentication, forms, and authorization</p>
+    <h1>Installation</h1>
+    <p>Refer to the README.md file per project in this collection</p>
     <h2> Part One </h2>
     <p> This part covered the basics of django, including the projects storefront and movies.</p>
     <ul>
@@ -16,7 +18,7 @@
     <p>Then install django using pip </p>
     <code>pip install django</code> <br />
     <li>Starting the application</li>
-    <p>After installing, you can start the project in the current directory with:</p>
+    <p>After installing, you can start a project in the current directory with:</p>
     <code>django-admin startproject mysite . </code>
     <p>Once the project is started, you can create migrations, start an app, add views and urls, create templates and static files, and run the server.</p>
     <code>python manage.py migrate</code> <br />
@@ -48,7 +50,7 @@
     <p>Then create the urls for the views, and add them to the project urls using path()</p>
     <p>Then run the server and test the api using the admin site, requests module or postman</p>
     <code>python manage.py runserver</code> <br />
-    <p>The admin site can be used for managing the api.</p>
+    <p>The admin site can be used for managing any api.</p>
     </ul>
     <h2>Contributors</h2>
     <table>
